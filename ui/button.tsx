@@ -1,21 +1,24 @@
 import React from "react"
 import styles from "./button.module.scss"
-import { IKeysAreaProps as IButtonProps } from "../components/keys/index"
+
+export interface IButtonProps {
+  emmitEvent: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {}
+  stretch?: string
+  color: string
+  value: string
+}
 
 const Button: React.FC<IButtonProps> = ({
-  division,
-  multiplication,
-  subtraction,
-  addition,
-  deletion,
-  calculate,
+  emmitEvent,
   color,
   value,
-  stretch,
+  stretch = "",
 }) => {
   return (
     <>
-      <div className={`${styles.button} ${styles[color]} ${styles[stretch]}`}>
+      <div
+        className={`${styles.button} ${styles[color]} ${styles[stretch]}`}
+        onClick={emmitEvent}>
         {value}
       </div>
     </>
