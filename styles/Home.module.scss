@@ -1,12 +1,36 @@
+@import "./breakpoints";
+
 .homeWrapper {
   height: 100vh;
+  width: 100%;
   background-color: #3a4664;
+  display: flex;
+  align-items: center;
+  padding: 20px;
 
   .calcWrapper {
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    gap: 15px;
+    width: 350px;
+  }
+}
+
+@media (min-width: $smallTablet) {
+  .homeWrapper {
+    .calcWrapper {
+      width: 450px;
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .homeWrapper {
+    .calcWrapper {
+      width: 550px;
+    }
   }
 }

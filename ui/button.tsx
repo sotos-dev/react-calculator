@@ -3,22 +3,13 @@ import styles from "./button.module.scss"
 
 export interface IButtonProps {
   emmitEvent: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {}
-  stretch?: string
-  color: string
   value: string
 }
 
-const Button: React.FC<IButtonProps> = ({
-  emmitEvent,
-  color,
-  value,
-  stretch = "",
-}) => {
+const Button: React.FC<IButtonProps> = ({ emmitEvent, value }) => {
   return (
     <>
-      <div
-        className={`${styles.button} ${styles[color]} ${styles[stretch]}`}
-        onClick={emmitEvent}>
+      <div className={styles.button} onClick={emmitEvent}>
         {value}
       </div>
     </>

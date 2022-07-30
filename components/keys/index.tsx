@@ -1,21 +1,30 @@
 import React, { Dispatch, SetStateAction, useState } from "react"
 import styles from "./index.module.scss"
 import Button from "../../ui/button"
+import { useTheme } from "../../context/ThemeContext"
 
 interface IKeysAreaProps {
   setTotal: React.Dispatch<React.SetStateAction<number>>
-  total: number
   setCurrentValue: React.Dispatch<React.SetStateAction<string[]>>
   currentValue: string[]
+  error: boolean
+  setError: React.Dispatch<React.SetStateAction<boolean>>
+  errorMessage: string
+  setErrorMessage: React.Dispatch<React.SetStateAction<string>>
 }
 
 const KeysArea = ({
   setTotal,
-  total,
   setCurrentValue,
   currentValue,
+  error,
+  setError,
+  errorMessage,
+  setErrorMessage,
 }: IKeysAreaProps) => {
-  const getNumber = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): any => {
+  // Get number or operator and put it in an array, operators cannot be adjacent, if user
+  // tries to enter an operator side by side, we pop the last one out and the latest
+  const getValue = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): any => {
     const value = e.target as HTMLElement
 
     if (
@@ -30,12 +39,11 @@ const KeysArea = ({
         value.innerText === "*" ||
         value.innerText === "/"
       ) {
-        const sequence: string[] = currentValue.slice(1, -1)
-        sequence.push(value.innerText)
-        setCurrentValue((prev) => [...prev, sequence.toString()])
+        currentValue.pop()
+        setCurrentValue(currentValue)
       }
     }
-    // setCurrentValue((prev) => [...prev, value.innerText])
+    setCurrentValue((prev) => [...prev, value.innerText])
   }
 
   const deleteLastDigit = (
@@ -52,42 +60,124 @@ const KeysArea = ({
   }
 
   const calculate = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): any => {
-    setTotal(eval(currentValue.join("")))
-    setCurrentValue([])
+    try {
+      setTotal(eval(currentValue.join("")))
+      setCurrentValue([])
+    } catch (error) {
+      setError(true)
+      setErrorMessage(
+        `Avoid using numbers like 01 or 010.
+         *decimal numbers like 0.1 or 0.10 are okay to use`
+      )
+    }
   }
+
+  const { theme } = useTheme()
 
   return (
     <>
       <section className={styles.keysGridWrapper}>
         <div className={styles.keysGrid}>
-          <Button color='white' value='7' emmitEvent={getNumber} />
-          <Button color='white' value='8' emmitEvent={getNumber} />
-          <Button color='white' value='9' emmitEvent={getNumber} />
-          <Button color='blue' value='DEL' emmitEvent={deleteLastDigit} />
-          <Button color='white' value='4' emmitEvent={getNumber} />
-          <Button color='white' value='5' emmitEvent={getNumber} />
-          <Button color='white' value='6' emmitEvent={getNumber} />
-          <Button color='white' value='+' emmitEvent={getNumber} />
-          <Button color='white' value='1' emmitEvent={getNumber} />
-          <Button color='white' value='2' emmitEvent={getNumber} />
-          <Button color='white' value='3' emmitEvent={getNumber} />
-          <Button color='white' value='-' emmitEvent={getNumber} />
-          <Button color='white' value='.' emmitEvent={getNumber} />
-          <Button color='white' value='0' emmitEvent={getNumber} />
-          <Button color='white' value='/' emmitEvent={getNumber} />
-          <Button color='white' value='*' emmitEvent={getNumber} />
-          <Button
-            stretch='stretchReset'
-            color='blue'
-            value='RESET'
-            emmitEvent={reset}
-          />
-          <Button
-            stretch='stretchEquals'
-            color='orange'
-            value='='
-            emmitEvent={calculate}
-          />
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='7' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='8' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='9' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{
+              backgroundColor: theme.delResetBgColor,
+              color: theme.delResetColor,
+            }}>
+            <Button value='DEL' emmitEvent={deleteLastDigit} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='4' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='5' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='6' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='+' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='1' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='2' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='3' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='-' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='.' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='0' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='/' emmitEvent={getValue} />
+          </div>
+          <div
+            className={styles["button-wrapper"]}
+            style={{ backgroundColor: theme.regularBgColor }}>
+            <Button value='*' emmitEvent={getValue} />
+          </div>
+          <div
+            className={`${styles["button-wrapper"]} ${styles["stretch-reset"]}`}
+            style={{
+              backgroundColor: theme.delResetBgColor,
+              color: theme.delResetColor,
+            }}>
+            <Button value='RESET' emmitEvent={reset} />
+          </div>
+          <div
+            style={{
+              backgroundColor: theme.calculateBgColor,
+              color: theme.calculateColor,
+            }}
+            className={`${styles["button-wrapper"]} ${styles["stretch-equals"]}`}>
+            <Button value='=' emmitEvent={calculate} />
+          </div>
+          <p className={styles["error-message"]}>{errorMessage}</p>
         </div>
       </section>
     </>

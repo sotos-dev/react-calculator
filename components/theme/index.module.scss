@@ -1,0 +1,30 @@
+.theme-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .switch-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    .switch-wrapper {
+      background-color: #181f32;
+      width: 70px;
+      height: 25px;
+      border-radius: 50px;
+      display: inline-block;
+      .switch {
+        width: 25px;
+        height: 25px;
+        background-color: #d13f30;
+        border-radius: 100%;
+        transition: 300ms;
+      }
+    }
+  }
+}
