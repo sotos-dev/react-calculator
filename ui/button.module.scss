@@ -1,4 +1,21 @@
+@import "../styles/breakpoints";
 
+.button {
+  padding: 15px 5px;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
 
+@media (min-width: $smallTablet) {
+  .button {
+    padding: 15px 25px;
+    font-size: 1.7rem;
+  }
+}
 
-
+@media (min-width: $tablet) {
+  .button {
+    padding: 10px 25px;
+    font-size: 2rem;
+  }
+}

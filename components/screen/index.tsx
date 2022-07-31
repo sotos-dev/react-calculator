@@ -4,11 +4,16 @@ import { useTheme } from "../../context/ThemeContext"
 import styles from "./index.module.scss"
 
 export interface IScreenAreaProps {
-  total: number
+  total: string
   currentValue: string[]
+  booleanChecker: boolean
 }
 
-const ScreenArea = ({ total, currentValue }: IScreenAreaProps) => {
+const ScreenArea = ({
+  total,
+  currentValue,
+  booleanChecker,
+}: IScreenAreaProps) => {
   const { theme } = useTheme()
 
   return (

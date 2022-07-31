@@ -1,4 +1,5 @@
 import React from "react"
+import { useTheme } from "../context/ThemeContext"
 import styles from "./button.module.scss"
 
 export interface IButtonProps {
@@ -7,9 +8,16 @@ export interface IButtonProps {
 }
 
 const Button: React.FC<IButtonProps> = ({ emmitEvent, value }) => {
+  const { theme } = useTheme()
+
   return (
     <>
-      <div className={styles.button} onClick={emmitEvent}>
+      <div
+        className={styles.button}
+        onClick={emmitEvent}
+        style={{
+          color: theme.regularButtonsColor,
+        }}>
         {value}
       </div>
     </>

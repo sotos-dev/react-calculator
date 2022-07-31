@@ -2,28 +2,44 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
 
   h1 {
     font-size: 2rem;
     font-weight: 700;
   }
 
-  .switch-area {
+  .switch-main-area {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     gap: 20px;
-    .switch-wrapper {
-      background-color: #181f32;
-      width: 70px;
-      height: 25px;
-      border-radius: 50px;
-      display: inline-block;
-      .switch {
-        width: 25px;
+    .theme-title {
+      margin-bottom: 5px;
+    }
+    .switch-area-wrapper {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      .switch-numbers {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 5px;
+      }
+
+      .switch-wrapper {
+        background-color: #181f32;
+        width: 70px;
         height: 25px;
-        background-color: #d13f30;
-        border-radius: 100%;
-        transition: 300ms;
+        border-radius: 50px;
+        display: inline-block;
+        .switch {
+          width: 25px;
+          height: 25px;
+          background-color: #d13f30;
+          border-radius: 100%;
+          transition: 300ms;
+        }
       }
     }
   }

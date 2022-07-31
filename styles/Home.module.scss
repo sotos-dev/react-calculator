@@ -9,28 +9,12 @@
   padding: 20px;
 
   .calcWrapper {
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     gap: 15px;
-    width: 350px;
-  }
-}
-
-@media (min-width: $smallTablet) {
-  .homeWrapper {
-    .calcWrapper {
-      width: 450px;
-    }
-  }
-}
-
-@media (min-width: $tablet) {
-  .homeWrapper {
-    .calcWrapper {
-      width: 550px;
-    }
   }
 }
