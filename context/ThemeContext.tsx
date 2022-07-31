@@ -9,38 +9,16 @@ export const useTheme = () => {
   return useContext(ThemeContext)
 }
 
-// interface IThemes {
-//   lightTheme: {
-//     titleColor: string
-//     regularBgColor: string
-//     regularColor: string
-//     delResetBgColor: string
-//     delResetColor: string
-//     calculateBgColor: string
-//     calculateColor: string
-//     screenBgColor: string
-//     screenColor: string
-//   }
-//   darkTheme: {
-//     titleColor: string
-//     regularBgColor: string
-//     regularColor: string
-//     delResetBgColor: string
-//     delResetColor: string
-//     calculateBgColor: string
-//     calculateColor: string
-//     screenBgColor: string
-//     screenColor: string
-//   }
-// }
 const themes = {
   light: {
+    bg: "#3a4664",
     keysBg: "#181F32",
     regularButtonsBg: "#E9E3DB",
-    regularButtonsColor: "#181F32",
+    regularBtnsColor: "#181F32",
     regularButtonsBorderColor: "#B7A99F",
     delResetBgColor: "#627199",
     delResetColor: "#fff",
+    delResetBorderColor: "#404E6F",
     calculateBgColor: "#D33C2C",
     calculateColor: "#fff",
     calculateBorderColor: "#9B251B",
@@ -48,32 +26,34 @@ const themes = {
     screenColor: "#fff",
   },
   dark: {
+    bg: "#E6E6E6",
     keysBg: "#D3CDCD",
     regularButtonsBg: "#E5E4E0",
-    regularButtonsColor: "#181F32",
+    regularBtnsColor: "#181F32",
     regularButtonsBorderColor: "#A79E96",
-    delResetBgColor: "#fff",
-    delResetColor: "#627199",
-    calculateBgColor: "#c7083e",
+    delResetBgColor: "#388187",
+    delResetColor: "#fff",
+    delResetBorderColor: "#1F666D",
+    calculateBgColor: "#ff7088",
     calculateColor: "#fff",
-    calculateBorderColor: "#a00b35",
-
+    calculateBorderColor: "#d6556b",
     screenBgColor: "#fff",
     screenColor: "#181F32",
   },
   contrast: {
-    keysBg: "#1B0930",
-    regularButtonsBg: "#331B4D",
-    regularButtonsColor: "#F8E34E",
-    regularButtonsBorderColor: "#7B2391",
-    delResetBgColor: "#19d529",
-    delResetColor: "#1d2437",
-    calculateBgColor: "#1dcad6",
+    bg: "#ADBECF",
+    keysBg: "#F7C8C8",
+    regularButtonsBg: "#F18080",
+    regularBtnsColor: "#ffffff",
+    regularButtonsBorderColor: "#d35252",
+    delResetBgColor: "#9BC6D3",
+    delResetColor: "#fff",
+    delResetBorderColor: "#79adbd",
+    calculateBgColor: "#ffe590",
     calculateColor: "#2f2f2f",
-    calculateBorderColor: "#34f1e4",
-
-    screenBgColor: "#fff",
-    screenColor: "#181F32",
+    calculateBorderColor: "#e8c67b",
+    screenBgColor: "#F7C8C8",
+    screenColor: "#62000d",
   },
 }
 

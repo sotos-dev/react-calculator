@@ -34,6 +34,7 @@ const KeysArea = ({
     const value = e.target as HTMLElement
 
     if (currentValue.length === 0) {
+      setError(false)
       if (
         value.innerText === "+" ||
         value.innerText === "-" ||
@@ -49,12 +50,14 @@ const KeysArea = ({
       currentValue[currentValue.length - 1] === "+" ||
       currentValue[currentValue.length - 1] === "-" ||
       currentValue[currentValue.length - 1] === "*" ||
+      currentValue[currentValue.length - 1] === "." ||
       currentValue[currentValue.length - 1] === "/"
     ) {
       if (
         value.innerText === "+" ||
         value.innerText === "-" ||
         value.innerText === "*" ||
+        value.innerText === "." ||
         value.innerText === "/"
       ) {
         currentValue.pop()
@@ -64,8 +67,8 @@ const KeysArea = ({
 
     //
     if (booleanChecker === true) {
-      console.log("run 1")
       if (
+        value.innerText === "0" ||
         value.innerText === "1" ||
         value.innerText === "2" ||
         value.innerText === "3" ||
@@ -77,36 +80,50 @@ const KeysArea = ({
         value.innerText === "9" ||
         value.innerText === "."
       ) {
-        console.log("run 2")
-
         setCurrentValue([value.innerText])
         setBooleanChecker(false)
       } else {
-        console.log("run 3")
         setBooleanChecker(false)
 
         setCurrentValue((prev) => [...prev, value.innerText])
       }
     } else {
-      console.log("run 4")
-
       setCurrentValue((prev) => [...prev, value.innerText])
     }
   }
 
-  console.log(booleanChecker)
+  const getKeyValue = (e: React.KeyboardEvent<HTMLDivElement>): any => {
+    const value = e.target as HTMLElement
 
+    console.log(value)
+  }
+  // Deletes last entry
   const deleteLastDigit = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ): any => {
-    const removeOne = [...currentValue]
-    removeOne.splice(-1)
-    setCurrentValue(removeOne)
+    if (booleanChecker === true) {
+      const removeOne = [...currentValue]
+      const resetRemoveOne = Array.from(removeOne.toString().split(""))
+      resetRemoveOne.splice(-1)
+      setCurrentValue(resetRemoveOne)
+      console.log("run1")
+      setBooleanChecker(false)
+    } else {
+      const removeOne = [...currentValue]
+      console.log("run2")
+      removeOne.splice(-1)
+      setCurrentValue(removeOne)
+    }
+
+    if (currentValue.length === 1) {
+      setError(false)
+    }
   }
 
   const reset = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): any => {
     setTotal("0")
     setCurrentValue([])
+    setError(false)
   }
 
   const calculate = (e: React.MouseEvent<HTMLDivElement, MouseEvent>): any => {
@@ -119,10 +136,11 @@ const KeysArea = ({
       setTotal(eval(numberResult.toString()))
       setCurrentValue(renewCurrentValue)
       setBooleanChecker(true)
+      setError(false)
     } catch (error) {
       setError(true)
       setErrorMessage(
-        `Avoid using numbers like 01 or 010.
+        `Avoid using numbers like 01 or 010, or leaving operators as last values.
          *decimal numbers like 0.1 or 0.10 are okay to use`
       )
     }
@@ -140,32 +158,47 @@ const KeysArea = ({
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
-              color: theme.regularButtonsColor,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='7' emmitEvent={getValue} />
+            <Button
+              value='7'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='8' emmitEvent={getValue} />
+            <Button
+              value='8'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='9' emmitEvent={getValue} />
+            <Button
+              value='9'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.delResetBgColor,
               color: theme.delResetColor,
+              borderBottom: `5px solid ${theme.delResetBorderColor}`,
             }}>
             <Button value='DEL' emmitEvent={deleteLastDigit} />
           </div>
@@ -173,103 +206,164 @@ const KeysArea = ({
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='4' emmitEvent={getValue} />
+            <Button
+              value='4'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='5' emmitEvent={getValue} />
+            <Button
+              value='5'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='6' emmitEvent={getValue} />
+            <Button
+              value='6'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='+' emmitEvent={getValue} />
+            <Button
+              value='+'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='1' emmitEvent={getValue} />
+            <Button
+              value='1'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='2' emmitEvent={getValue} />
+            <Button
+              value='2'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='3' emmitEvent={getValue} />
+            <Button
+              value='3'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='-' emmitEvent={getValue} />
+            <Button
+              value='-'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='.' emmitEvent={getValue} />
+            <Button
+              value='.'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='0' emmitEvent={getValue} />
+            <Button
+              value='0'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='/' emmitEvent={getValue} />
+            <Button
+              value='/'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={styles["button-wrapper"]}
             style={{
               backgroundColor: theme.regularButtonsBg,
+              color: theme.regularBtnsColor,
               borderBottom: `5px solid ${theme.regularButtonsBorderColor}`,
             }}>
-            <Button value='*' emmitEvent={getValue} />
+            <Button
+              value='*'
+              emmitEvent={getValue}
+              emmitKeyEvent={getKeyValue}
+            />
           </div>
           <div
             className={`${styles["button-wrapper"]} ${styles["stretch-reset"]}`}
             style={{
               backgroundColor: theme.delResetBgColor,
               color: theme.delResetColor,
+              borderBottom: `5px solid ${theme.delResetBorderColor}`,
             }}>
             <Button value='RESET' emmitEvent={reset} />
           </div>

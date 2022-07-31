@@ -3,6 +3,7 @@ import React, { useState } from "react"
 import KeysArea from "../components/keys"
 import ScreenArea from "../components/screen"
 import ThemeArea from "../components/theme"
+import { useTheme } from "../context/ThemeContext"
 
 const Homepage: React.FC = () => {
   const [total, setTotal] = useState<string>("0")
@@ -11,16 +12,16 @@ const Homepage: React.FC = () => {
   const [error, setError] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
 
+  const { theme } = useTheme()
+
   return (
     <>
-      <section className={styles.homeWrapper}>
+      <section
+        className={styles.homeWrapper}
+        style={{ backgroundColor: theme.bg }}>
         <div className={styles.calcWrapper}>
           <ThemeArea />
-          <ScreenArea
-            booleanChecker={booleanChecker}
-            total={total}
-            currentValue={currentValue}
-          />
+          <ScreenArea total={total} currentValue={currentValue} />
           <KeysArea
             setTotal={setTotal}
             total={total}

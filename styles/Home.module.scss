@@ -3,10 +3,10 @@
 .homeWrapper {
   height: 100vh;
   width: 100%;
-  background-color: #3a4664;
   display: flex;
   align-items: center;
   padding: 20px;
+  transition: all 300ms;
 
   .calcWrapper {
     max-width: 100%;

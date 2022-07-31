@@ -11,22 +11,25 @@ const ThemeArea = ({}: IThemeAreaProps) => {
   return (
     <>
       <div className={styles["theme-wrapper"]}>
-        <h1 style={{ color: theme.titleColor }}>calc</h1>
+        <h1 style={{ color: theme.screenColor }}>calc</h1>
         <div className={styles["switch-main-area"]}>
           <h2
-            style={{ color: theme.titleColor }}
+            style={{ color: theme.screenColor }}
             className={styles["theme-title"]}>
             Theme
           </h2>
           <div className={styles["switch-area-wrapper"]}>
             <div
-              style={{ color: theme.titleColor }}
+              style={{ color: theme.screenColor }}
               className={styles["switch-numbers"]}>
               <span>1</span>
               <span>2</span>
               <span>3</span>
             </div>
-            <div className={styles["switch-wrapper"]} onClick={handleSwitch}>
+            <div
+              style={{ backgroundColor: theme.keysBg }}
+              className={styles["switch-wrapper"]}
+              onClick={handleSwitch}>
               <div
                 style={{
                   transform: `translateX(${switcher}px)`,

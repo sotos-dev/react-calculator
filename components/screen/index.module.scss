@@ -1,9 +1,13 @@
+@import "../../styles/breakpoints";
+
 .screen-wrapper {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   width: 100%;
-  padding: 10px 20px;
+  padding: 5px 20px;
+  border-radius: 12px;
+  transition: all 300ms;
 
   .total {
     font-size: 1.5rem;
@@ -16,8 +20,48 @@
     width: 100%;
     display: flex;
     flex-direction: row;
-    margin-top: 20px;
-    font-size: 3rem;
+    margin-top: 10px;
+    font-size: 2rem;
     font-weight: 700;
+
+    .waiting-cursor {
+      font-weight: 300;
+      transition: 200ms ease;
+    }
+
+    .intervalize {
+      opacity: 0;
+    }
+  }
+}
+
+@media (min-width: $smallTablet) {
+  .screen-wrapper {
+    padding: 10px 20px;
+    border-radius: 12px;
+
+    .total {
+      font-size: 1.8rem;
+    }
+
+    .current-number-wrapper {
+      margin-top: 20px;
+      font-size: 2.5rem;
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .screen-wrapper {
+    padding: 10px 20px;
+    border-radius: 12px;
+
+    .total {
+      font-size: 2rem;
+    }
+
+    .current-number-wrapper {
+      font-size: 2.7rem;
+    }
   }
 }
