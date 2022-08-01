@@ -9,12 +9,20 @@
   transition: all 300ms;
 
   .calcWrapper {
-    max-width: 100%;
+    width: 330px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     gap: 15px;
+  }
+}
+
+@media (min-width: $smallTablet) {
+  .homeWrapper {
+    .calcWrapper {
+      width: 500px;
+    }
   }
 }

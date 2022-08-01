@@ -4,15 +4,10 @@ import styles from "./button.module.scss"
 
 export interface IButtonProps {
   emmitEvent: (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {}
-  emmitKeyEvent: (e: React.KeyboardEvent<HTMLDivElement>) => {}
   value: string
 }
 
-const Button: React.FC<IButtonProps> = ({
-  emmitEvent,
-  emmitKeyEvent,
-  value,
-}) => {
+const Button: React.FC<IButtonProps> = ({ emmitEvent, value }) => {
   const { theme } = useTheme()
 
   return (
@@ -20,7 +15,6 @@ const Button: React.FC<IButtonProps> = ({
       <div
         className={styles.button}
         onClick={emmitEvent}
-        onKeyDown={emmitKeyEvent}
         style={{
           color: theme.regularButtonsColor,
         }}>

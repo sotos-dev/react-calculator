@@ -24,7 +24,6 @@ const Homepage: React.FC = () => {
           <ScreenArea total={total} currentValue={currentValue} />
           <KeysArea
             setTotal={setTotal}
-            total={total}
             setCurrentValue={setCurrentValue}
             currentValue={currentValue}
             error={error}
